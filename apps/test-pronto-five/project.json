@@ -1,0 +1,95 @@
+{
+  "name": "test-pronto-five",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/test-pronto-five/src",
+  "prefix": "test-pronto-five",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/test-pronto-five",
+        "index": "apps/test-pronto-five/src/index.html",
+        "main": "apps/test-pronto-five/src/main.ts",
+        "polyfills": "apps/test-pronto-five/src/polyfills.ts",
+        "tsConfig": "apps/test-pronto-five/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/test-pronto-five/src/favicon.ico",
+          "apps/test-pronto-five/src/assets"
+        ],
+        "styles": ["apps/test-pronto-five/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/test-pronto-five/src/environments/environment.ts",
+              "with": "apps/test-pronto-five/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "test-pronto-five:build:production"
+        },
+        "development": {
+          "browserTarget": "test-pronto-five:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "test-pronto-five:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/test-pronto-five/src/**/*.ts",
+          "apps/test-pronto-five/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/test-pronto-five"],
+      "options": {
+        "jestConfig": "apps/test-pronto-five/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
